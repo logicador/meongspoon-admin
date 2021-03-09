@@ -40,6 +40,12 @@
         <link rel="stylesheet" type="text/css" href="/css/notice.css" />
     <% } else if (menu == 'question' || menu == 'question_detail') { %>
         <link rel="stylesheet" type="text/css" href="/css/question.css" />
+
+    <% } else if (menu == 'user') { %>
+        <link rel="stylesheet" type="text/css" href="/css/user.css" />
+
+    <% } else if (menu == 'pet') { %>
+        <link rel="stylesheet" type="text/css" href="/css/pet.css" />
     <% } %>
 </head>
 <body>
@@ -69,6 +75,8 @@
         </ul>
         <a href="/user"><div class="main-menu">사용자 관리</div></a>
         <ul class="sub-menu">
+            <a href="/user"><li>사용자</li></a>
+            <a href="/pet"><li>펫</li></a>
             <a href="/notice"><li>공지사항</li></a>
             <a href="/question"><li>1:1 문의</li></a>
         </ul>
@@ -149,6 +157,12 @@
         <% include ./question %>
     <% } else if (menu == 'question_detail') { %>
         <% include ./question_detail %>
+
+    <% } else if (menu == 'user') { %>
+        <% include ./user %>
+
+    <% } else if (menu == 'pet') { %>
+        <% include ./pet %>
     <% } %>
 
     </article>
@@ -185,6 +199,10 @@
         <script src="/js/notice.js"></script>
     <% } else if (menu == 'question' || menu == 'question_detail') { %>
         <script src="/js/question.js"></script>
+    <% } else if (menu == 'user') { %>
+        <script src="/js/user.js"></script>
+    <% } else if (menu == 'pet') { %>
+        <script src="/js/pet.js"></script>
     <% } %>
 
 </body>

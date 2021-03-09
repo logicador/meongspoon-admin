@@ -504,4 +504,28 @@ router.get('/question/detail/:qId', (req, res) => {
 });
 
 
+router.get('/user', (req, res) => {
+    if (!isLogined(req.session)) {
+        res.redirect('/login');
+        return;
+    }
+
+    res.render('index', {
+        menu: 'user'
+    });
+});
+
+
+router.get('/pet', (req, res) => {
+    if (!isLogined(req.session)) {
+        res.redirect('/login');
+        return;
+    }
+
+    res.render('index', {
+        menu: 'pet'
+    });
+});
+
+
 module.exports = router;

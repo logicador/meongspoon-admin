@@ -33,6 +33,9 @@ router.use('/notice/get', require('./api/notice_get.js'));
 router.use('/question/get/all', require('./api/question_get_all.js'));
 router.use('/question/get', require('./api/question_get.js'));
 
+router.use('/user/get/all', require('./api/user_get_all.js'));
+router.use('/pet/get/all', require('./api/pet_get_all.js'));
+
 
 // POST
 router.use('/login', require('./api/login.js'));
