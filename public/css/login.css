@@ -1,0 +1,20 @@
+.wrapper.login .input-box {
+    margin-top: 32px;
+}
+.wrapper.login .input-box h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+.wrapper.login .input-box input {
+    width: 50%;
+    margin-top: 12px;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+}
+
+.wrapper.login button {
+    margin: 32px 0;
+    font-size: 1.2rem;
+    padding: 8px 16px;
+}
