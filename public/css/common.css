@@ -135,24 +135,21 @@ header .title-wrapper .title {
 	-o-transform: translateY(50%);
 	transform: translateY(50%);
 }
-header .controls {
-    padding-right: 32px;
+header .logout {
     position: absolute;
-    right: 0;
-	bottom: 50%;
+    right: 16px;
+    bottom: 50%;
     -webkit-transform: translateY(50%);
 	-moz-transform: translateY(50%);
 	-ms-transform: translateY(50%);
 	-o-transform: translateY(50%);
-    transform: translateY(50%);
-    font-size: 0;
-}
-header .controls .control {
-    display: inline-block;
-    vertical-align: middle;
+	transform: translateY(50%);
+
+    border: none;
     cursor: pointer;
+    color: #FFFFFF;
     font-size: 1rem;
-    margin-left: 16px;
+    font-weight: 400;
 }
 header .mobile-menu {
     position: absolute;

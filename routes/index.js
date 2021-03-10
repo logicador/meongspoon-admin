@@ -11,14 +11,16 @@ router.get('/', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'main'
+        menu: 'main',
+        isLogined: req.session.isLogined
     });
 });
 
 
 router.get('/login', (req, res) => {
     res.render('index', {
-        menu: 'login'
+        menu: 'login',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -30,7 +32,8 @@ router.get('/nutrient', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'nutrient'
+        menu: 'nutrient',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -42,7 +45,8 @@ router.get('/nutrient/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'nutrient_add'
+        menu: 'nutrient_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -55,6 +59,7 @@ router.get('/nutrient/detail/:nId', (req, res) => {
 
     res.render('index', {
         menu: 'nutrient_detail',
+        isLogined: req.session.isLogined,
 
         nId: req.params.nId
     });
@@ -68,7 +73,8 @@ router.get('/food', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'food'
+        menu: 'food',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -103,6 +109,7 @@ router.get('/food/add', async (req, res) => {
 
     res.render('index', {
         menu: 'food_add',
+        isLogined: req.session.isLogined,
 
         foodCategory1List: result,
         foodCategory2List: JSON.stringify(foodCategory2List)
@@ -140,6 +147,7 @@ router.get('/food/detail/:fId', async (req, res) => {
 
     res.render('index', {
         menu: 'food_detail',
+        isLogined: req.session.isLogined,
 
         fId: req.params.fId,
 
@@ -156,7 +164,8 @@ router.get('/disease', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'disease'
+        menu: 'disease',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -168,7 +177,8 @@ router.get('/disease/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'disease_add'
+        menu: 'disease_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -181,6 +191,7 @@ router.get('/disease/detail/:dId', (req, res) => {
 
     res.render('index', {
         menu: 'disease_detail',
+        isLogined: req.session.isLogined,
 
         dId: req.params.dId
     });
@@ -194,7 +205,8 @@ router.get('/symptom', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'symptom'
+        menu: 'symptom',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -206,7 +218,8 @@ router.get('/symptom/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'symptom_add'
+        menu: 'symptom_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -219,6 +232,7 @@ router.get('/symptom/detail/:sId', (req, res) => {
 
     res.render('index', {
         menu: 'symptom_detail',
+        isLogined: req.session.isLogined,
 
         sId: req.params.sId
     });
@@ -232,7 +246,8 @@ router.get('/product', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'product'
+        menu: 'product',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -244,7 +259,8 @@ router.get('/product/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'product_add'
+        menu: 'product_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -295,6 +311,7 @@ router.get('/product/detail/:pId', async (req, res) => {
 
     res.render('index', {
         menu: 'product_detail',
+        isLogined: req.session.isLogined,
 
         pId: req.params.pId,
 
@@ -318,7 +335,8 @@ router.get('/product/category', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'product_category'
+        menu: 'product_category',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -330,7 +348,8 @@ router.get('/product/brand', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'product_brand'
+        menu: 'product_brand',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -342,7 +361,8 @@ router.get('/breed', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'breed'
+        menu: 'breed',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -354,7 +374,8 @@ router.get('/breed/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'breed_add'
+        menu: 'breed_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -367,6 +388,7 @@ router.get('/breed/detail/:bId', (req, res) => {
 
     res.render('index', {
         menu: 'breed_detail',
+        isLogined: req.session.isLogined,
 
         bId: req.params.bId
     });
@@ -397,6 +419,7 @@ router.get('/breed/weak/disease/:bagId', async (req, res) => {
 
     res.render('index', {
         menu: 'breed_weak_disease',
+        isLogined: req.session.isLogined,
 
         bagId: bagId,
 
@@ -414,7 +437,8 @@ router.get('/inoculation', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'inoculation'
+        menu: 'inoculation',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -426,7 +450,8 @@ router.get('/food_nutrient/category', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'food_nutrient_category'
+        menu: 'food_nutrient_category',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -438,7 +463,8 @@ router.get('/food/category', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'food_category'
+        menu: 'food_category',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -450,7 +476,8 @@ router.get('/notice', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'notice'
+        menu: 'notice',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -461,7 +488,8 @@ router.get('/notice/add', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'notice_add'
+        menu: 'notice_add',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -473,6 +501,7 @@ router.get('/notice/detail/:noId', (req, res) => {
 
     res.render('index', {
         menu: 'notice_detail',
+        isLogined: req.session.isLogined,
 
         noId: req.params.noId
     });
@@ -486,7 +515,8 @@ router.get('/question', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'question'
+        menu: 'question',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -498,6 +528,7 @@ router.get('/question/detail/:qId', (req, res) => {
 
     res.render('index', {
         menu: 'question_detail',
+        isLogined: req.session.isLogined,
 
         qId: req.params.qId
     });
@@ -511,7 +542,8 @@ router.get('/user', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'user'
+        menu: 'user',
+        isLogined: req.session.isLogined
     });
 });
 
@@ -523,7 +555,8 @@ router.get('/pet', (req, res) => {
     }
 
     res.render('index', {
-        menu: 'pet'
+        menu: 'pet',
+        isLogined: req.session.isLogined
     });
 });
 

@@ -39,6 +39,7 @@ router.use('/pet/get/all', require('./api/pet_get_all.js'));
 
 // POST
 router.use('/login', require('./api/login.js'));
+router.use('/logout', require('./api/logout.js'));
 router.use('/upload/image', require('./api/upload_image.js'));
 router.use('/delete/image', require('./api/delete_image.js'));
 

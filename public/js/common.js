@@ -7,6 +7,7 @@ const divKeywordList = document.querySelector('.js-div-keyword-list');
 const divKeywordAdd = document.querySelector('.js-div-keyword-add');
 const inputKeywordAdd = document.querySelector('.js-input-keyword-add');
 const buttonKeywordAdd = document.querySelector('.js-button-keyword-add');
+const buttonLogout = document.querySelector('.js-button-logout');
 
 
 function noneToDash(value) {
@@ -142,6 +143,23 @@ function initCommon() {
             }
         }
     });
+
+    if (buttonLogout) {
+        buttonLogout.addEventListener('click', () => {
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then((data) => { return data.json(); })
+            .then((response) => {
+                if (response.status != 'OK') {
+                    alert('에러가 발생했습니다.');
+                    return;
+                }
+                location.href = '/login';
+            });
+        });
+    }
 
     if (selectBodyPart) {
         let html = '';

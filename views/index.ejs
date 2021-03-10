@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta http-equiv="cleartype" content="on" />
-    <meta name="description" content="PetAdmin" />
+    <meta name="description" content="MeongspoonAdmin" />
     <meta name="keywords"  content="" />
     <meta name="theme-color" content="#333333">
 
-    <title>반려앱 | 관리자</title>
+    <title>멍스푼 | 관리자</title>
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
@@ -53,8 +53,11 @@
 
     <header>
         <a href="/"><div class="title-wrapper">
-            <p class="title">반려앱 ADMIN</p>
+            <p class="title">멍스푼 ADMIN</p>
         </div></a>
+        <% if (isLogined) { %>
+            <button class="logout js-button-logout">로그아웃</button>
+        <% } %>
         <div class="js-div-mobile-menu mobile-menu"><i class="far fa-bars"></i></div>
     </header>
 
