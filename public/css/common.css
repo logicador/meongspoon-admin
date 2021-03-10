@@ -392,6 +392,19 @@ footer .wrapper {
     padding: 84px 0;
     text-align: center;
 }
+footer .wrapper p.meongspoon {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+footer .wrapper p.copy {
+    margin: 16px 0 0 0;
+}
+footer .wrapper p.hand {
+    margin: 16px 0 0 0;
+    font-size: 0.8rem;
+    font-weight: 300;
+}
 
 
 .overlay {
