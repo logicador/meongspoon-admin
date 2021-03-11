@@ -49,6 +49,12 @@ router.use('/nutrient/delete', require('./api/nutrient_delete.js'));
 router.use('/food/save', require('./api/food_save.js'));
 router.use('/food/delete', require('./api/food_delete.js'));
 
+router.use('/disease/save', require('./api/disease_save.js'));
+router.use('/disease/delete', require('./api/disease_delete.js'));
+
+router.use('/symptom/save', require('./api/symptom_save.js'));
+router.use('/symptom/delete', require('./api/symptom_delete.js'));
+
 router.use('/product/save', require('./api/product_save.js'));
 router.use('/product/delete', require('./api/product_delete.js'));
 router.use('/product/category/save', require('./api/product_category_save.js'));
