@@ -18,8 +18,6 @@ router.get('', async (req, res) => {
 
         res.json({ status: 'OK', result: result });
 
-        res.json({ status: 'OK' });
-
     } catch(error) {
         console.log(error);
         res.json({ status: 'ERR_INTERNAL_SERVER' });
