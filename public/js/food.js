@@ -17,6 +17,7 @@ const selectEdible = document.querySelector('.js-select-edible');
 const selectCategory1 = document.querySelector('.js-select-category1');
 const selectCategory2 = document.querySelector('.js-select-category2');
 const inputHiddenFoodCategoryData = document.querySelector('.js-input-hidden-food-category-data');
+const inputDescShort = document.querySelector('.js-input-desc-short');
 let category2List = [];
 
 
@@ -38,7 +39,7 @@ function getFoodList() {
             html +=     '<td>' + food.f_id + '</td>';
             html +=     '<td>' + food.f_name + '</td>';
             html +=     '<td><div class="thumbnail" style="background-image: url(' + food.f_thumbnail + '), url(/img/no_image.png)"></div></td>';
-            html +=     '<td>' + noneToDash(food.f_desc) + '</td>';
+            html +=     '<td>' + noneToDash(food.f_desc_short) + '</td>';
             html +=     '<td class="buttons">';
             html +=         '<a href="/food/detail/' + food.f_id + '"><button class="default">자세히</button></a>';
             html +=         '<button class="js-button-remove default remove">삭제</button>';
@@ -71,6 +72,7 @@ function getFood(fId) {
         let nutrientList = response.result.nutrientList;
 
         inputName.value = food.f_name;
+        inputDescShort.value = food.f_desc_short;
         textareaDesc.value = food.f_desc;
         // selectCategory.value = food.f_fnc_id;
         selectEdible.value = food.f_edible;
@@ -100,7 +102,7 @@ function getFood(fId) {
             let nId = nutrientList[i].n_id;
             let nName = nutrientList[i].n_name;
             html += '<button class="js-button-nutrient relationship default" nId="' + nId + '">' + nName + '</button>';
-        } 
+        }
         buttonNutrientAdd.insertAdjacentHTML('beforebegin', html);
 
         divNutrientList.querySelectorAll('.js-button-nutrient').forEach((buttonNutrient) => {
@@ -145,6 +147,7 @@ function removeFood(fId) {
 
 function saveFood(mode, callback) {
     let name = inputName.value.trim();
+    let descShort = inputDescShort.value.trim();
     let desc = textareaDesc.value.trim();
 
     if (name === '') {
@@ -172,7 +175,7 @@ function saveFood(mode, callback) {
     //     removeSpinner('SAVE_FOOD');
     //     removeOverlay('SAVE_FOOD');
     //     return;
-    // } 
+    // }
 
     let keyword = keywordList.join('|');
 
@@ -190,6 +193,7 @@ function saveFood(mode, callback) {
         body: JSON.stringify({
             mode: mode,
             name: name,
+            descShort: descShort,
             desc: desc,
             keyword: keyword,
             nutrients: nutrientList,
@@ -208,7 +212,7 @@ function saveFood(mode, callback) {
             removeOverlay('SAVE_FOOD');
             return;
         }
-        
+
         callback(response);
     });
 }
@@ -388,7 +392,7 @@ function foodInit() {
                         fc2Html += '<button class="js-button-food-category2 default" fc2Id="' + fc2Id + '">' + fc2Name + '</button>';
                     }
                 }
-                
+
                 html +=     '<td class="food-category2">' + fc2Html + '</td>';
                 html +=     '<td class="buttons">';
                 html +=         '<button class="js-button-add default">하위 카테고리 추가</button>';
@@ -481,7 +485,7 @@ function foodInit() {
             location.href = '/food';
         });
     }
-    
+
     if (buttonFoodAdd) {
         buttonFoodAdd.addEventListener('click', () => {
             createOverlay(999, 'SAVE_FOOD');
@@ -526,7 +530,7 @@ function foodInit() {
                     formData.append('type', 'THUMB');
                     formData.append('dataType', 'food');
                     formData.append('targetId', inputHiddenFId.value);
-    
+
                     uploadImage(formData, (response) => {
                         if (response.status != 'OK') {
                             alert("에러가 발생했습니다.");
@@ -621,17 +625,17 @@ function foodInit() {
                         if (this.classList.contains('selected')) {
                             this.classList.remove('selected');
                             divNutrientList.querySelector('.js-button-nutrient[nId="' + nId + '"]').remove();
-                            
+
                         } else {
                             this.classList.add('selected');
                             let nName = this.getAttribute('nName');
 
                             let html = '<button class="js-button-nutrient relationship default" nId="' + nId + '">' + nName + '</button>';
                             buttonNutrientAdd.insertAdjacentHTML('beforebegin', html);
-    
+
                             let buttonNutrientList = divNutrientList.querySelectorAll('.js-button-nutrient');
                             let buttonNutrient = buttonNutrientList[buttonNutrientList.length - 1];
-    
+
                             buttonNutrient.addEventListener('click', function() {
                                 this.remove();
                             });

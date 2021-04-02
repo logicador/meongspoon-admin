@@ -11,11 +11,12 @@ router.post('', async (req, res) => {
             res.json({ status: 'ERR_NO_PERMISSION' });
             return;
         }
-        
+
         let mode = req.body.mode; // ADD, MODIFY
         let fId = req.body.fId;
         let name = req.body.name;
         let keyword = req.body.keyword;
+        let descShort = req.body.descShort;
         let desc = req.body.desc;
         let nutrientList = req.body.nutrients;
 
@@ -29,13 +30,13 @@ router.post('', async (req, res) => {
         }
 
         let query = "";
-        let params = [name, keyword, desc, fc1Id, fc2Id, edible];
+        let params = [name, keyword, descShort, desc, fc1Id, fc2Id, edible];
 
         if (mode === 'ADD') {
-            query = "INSERT INTO t_foods (f_name, f_keyword, f_desc, f_fc1_id, f_fc2_id, f_edible) VALUES (?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO t_foods (f_name, f_keyword, f_desc_short, f_desc, f_fc1_id, f_fc2_id, f_edible) VALUES (?, ?, ?, ?, ?, ?, ?)";
             let [result, fields] = await pool.query(query, params);
             fId = result.insertId;
-        
+
         } else if (mode === 'MODIFY') {
             if (isNone(fId)) {
                 res.json({status: 'ERR_WRONG_PARAMS'});
@@ -43,7 +44,7 @@ router.post('', async (req, res) => {
             }
 
             query = "UPDATE t_foods SET";
-            query += " f_name = ?, f_keyword = ?, f_desc = ?, f_fc1_id = ?, f_fc2_id = ?, f_edible = ?";
+            query += " f_name = ?, f_keyword = ?, f_desc_short = ?, f_desc = ?, f_fc1_id = ?, f_fc2_id = ?, f_edible = ?";
             query += " WHERE f_id = ?";
             params.push(fId);
             await pool.query(query, params);

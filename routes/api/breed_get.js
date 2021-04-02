@@ -11,7 +11,7 @@ router.get('', async (req, res) => {
             res.json({ status: 'ERR_NO_PERMISSION' });
             return;
         }
-        
+
         let bId = req.query.bId;
 
         if (isNone(bId)) {
@@ -34,10 +34,10 @@ router.get('', async (req, res) => {
         params = [bId];
         [result, fields] = await pool.query(query, params);
 
-        if (result.length == 0) {
-            res.json({ status: 'ERR_NO_DATA' });
-            return;
-        }
+        // if (result.length == 0) {
+        //     res.json({ status: 'ERR_NO_DATA' });
+        //     return;
+        // }
 
         let breedAgeGroupList = result;
 

@@ -68,7 +68,7 @@ router.post('', async (req, res) => {
             await pool.query(query, params);
         }
 
-        res.json({ status: 'OK' });
+        res.json({ status: 'OK', bId: bId });
 
     } catch(error) {
         console.log(error);

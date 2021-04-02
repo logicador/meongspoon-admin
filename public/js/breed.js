@@ -12,6 +12,8 @@ const inputHiddenOriginalBreedAgeGroupData = document.querySelector('.js-input-h
 const inputHiddenBagId = document.querySelector('.js-input-hidden-bag-id');
 const buttonWeakDiseaseAdd = document.querySelector('.js-button-weak-disease-add');
 const tbodyWeakDiseaseList = document.querySelector('.js-tbody-breed-weak-disease-list');
+const inputCharacteristics = document.querySelector('.js-input-characteristics');
+// const imgCharacteristics = document.querySelector('.js-img-characteristics');
 
 let originalBagIdList = [];
 
@@ -79,7 +81,7 @@ function getBreed(bId) {
                 this.remove();
             });
         });
-        
+
         html = '';
         for (let i = 0; i < breedAgeGroupList.length; i++) {
             let breedAgeGroup = breedAgeGroupList[i];
@@ -101,7 +103,7 @@ function getBreed(bId) {
             });
             divBreedAgeGroup.querySelectorAll('input').forEach((input) => {
                 input.addEventListener('keyup', checkNumber);
-            }); 
+            });
         });
     });
 }
@@ -217,7 +219,7 @@ function saveBreed(mode, callback) {
             alert('에러가 발생했습니다.');
             return;
         }
-        
+
         callback(response);
     });
 }
@@ -232,7 +234,7 @@ function getBreedWeakDiseaseList() {
             alert('에러가 발생했습니다.');
             return;
         }
-        
+
         let weakDiseaseList = response.result;
         let html = '';
         for (let i = 0; i < weakDiseaseList.length; i++) {
@@ -329,24 +331,53 @@ function initBreed() {
             location.href = '/breed';
         });
     }
-    
+
     if (buttonBreedAdd) {
         buttonBreedAdd.addEventListener('click', () => {
+            createOverlay(999, 'SAVE_BREED');
+            createSpinner(999, 'SAVE_BREED');
             saveBreed('ADD', (response) => {
-                alert('견종이 추가되었습니다.');
-                location.href = '/breed';
+                let bId = response.bId;
+
+                if (inputCharacteristics.value) { // 이미지가 업로드 되었다면
+                    let form = inputCharacteristics.parentElement;
+                    let formData = new FormData(form);
+                    formData.append('bId', bId);
+
+                    fetch('/api/upload/breed/characteristics', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(data => data.json())
+                    .then((response) => {
+                        if (response.status != 'OK') {
+                            alert("에러가 발생했습니다.");
+                            removeSpinner('SAVE_BREED');
+                            removeOverlay('SAVE_BREED');
+                            return;
+                        }
+
+                        alert('견종이 추가되었습니다.');
+                        location.href = '/breed';
+                    });
+                } else {
+                    alert('견종이 추가되었습니다.');
+                    location.href = '/breed';
+                }
             });
         });
     }
 
     if (buttonBreedSave) {
         buttonBreedSave.addEventListener('click', () => {
+            createOverlay(999, 'SAVE_BREED');
+            createSpinner(999, 'SAVE_BREED');
             saveBreed('MODIFY', (response) => {
                 alert('견종이 수정되었습니다.');
             });
         });
     }
-    
+
     if (buttonBreedAgeGroupAdd) {
         buttonBreedAgeGroupAdd.addEventListener('click', () => {
             let html = '';
@@ -366,7 +397,7 @@ function initBreed() {
             });
             divBreedAgeGroup.querySelectorAll('input').forEach((input) => {
                 input.addEventListener('keyup', checkNumber);
-            }); 
+            });
         });
     }
 

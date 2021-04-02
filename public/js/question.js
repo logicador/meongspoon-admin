@@ -28,7 +28,7 @@ function getQuestionList() {
             html +=     '<td>' + question.q_id + '</td>';
             html +=     '<td>' + question.q_u_id + '</td>';
             html +=     '<td>' + question.u_nick_name + '</td>';
-            html +=     '<td>' + question.q_title + '</td>';
+            // html +=     '<td>' + question.q_title + '</td>';
             html +=     '<td class="' + question.q_status + '">' + ((question.q_status == 'Q') ? '답변필요' : '답변완료') + '</td>';
             html +=     '<td>' + question.q_created_date + '</td>';
             html +=     '<td class="buttons">';
@@ -54,8 +54,8 @@ function getQuestion(qId) {
         let question = response.result;
         pUId.innerText = '문의자 UID: ' + question.q_u_id;
         pUNickName.innerText = '문의자 닉네임: ' + question.u_nick_name;
-        pTitle.innerText = '문의 제목: ' + question.q_title;
-        pContents.innerText = '문의 내용\n' + question.q_contents;
+        // pTitle.innerText = '문의 제목: ' + question.q_title;
+        pContents.innerText = question.q_contents;
 
         if (question.q_status == 'A') {
             textareaAnswer.value = question.q_answer;

@@ -15,7 +15,7 @@ router.post('', (req, res) => {
             res.json({ status: 'ERR_NO_PERMISSION' });
             return;
         }
-        
+
         let form = new formidable.IncomingForm();
         form.encoding = 'utf-8';
         form.uploadDir = 'upload/tmp';

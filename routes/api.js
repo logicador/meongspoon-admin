@@ -42,6 +42,7 @@ router.use('/login', require('./api/login.js'));
 router.use('/logout', require('./api/logout.js'));
 router.use('/upload/image', require('./api/upload_image.js'));
 router.use('/delete/image', require('./api/delete_image.js'));
+router.use('/upload/breed/characteristics', require('./api/upload_breed_characteristics.js'));
 
 router.use('/nutrient/save', require('./api/nutrient_save.js'));
 router.use('/nutrient/delete', require('./api/nutrient_delete.js'));
