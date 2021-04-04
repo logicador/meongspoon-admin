@@ -31,19 +31,19 @@ router.get('', async (req, res) => {
         let breed = result[0];
 
         query = "SELECT * FROM t_breed_age_groups WHERE bag_b_id = ?";
-        params = [bId];
         [result, fields] = await pool.query(query, params);
-
-        // if (result.length == 0) {
-        //     res.json({ status: 'ERR_NO_DATA' });
-        //     return;
-        // }
 
         let breedAgeGroupList = result;
 
+        query = "SELECT * FROM t_breed_characters WHERE bc_b_id = ?";
+        [result, fields] = await pool.query(query, params);
+
+        let breedCharacter = result[0];
+
         res.json({status: 'OK', result: {
             breed : breed,
-            breedAgeGroupList: breedAgeGroupList
+            breedAgeGroupList: breedAgeGroupList,
+            breedCharacter: breedCharacter
         }});
 
     } catch(error) {

@@ -18,7 +18,25 @@ router.post('', async (req, res) => {
         let name = req.body.name;
         let keyword = req.body.keyword;
         let breedAgeGroups = req.body.breedAgeGroups;
-        // let deleteBreedAgeGroups = req.body.deleteBreedAgeGroups; // 폐기 예정 (취약질병 X)
+
+        let bcAda = req.body.bcAda;
+        let bcAff = req.body.bcAff;
+        let bcApa = req.body.bcApa;
+        let bcBar = req.body.bcBar;
+        let bcCat = req.body.bcCat;
+        let bcKid = req.body.bcKid;
+        let bcDog = req.body.bcDog;
+        let bcExe = req.body.bcExe;
+        let bcTri = req.body.bcTri;
+        let bcHea = req.body.bcHea;
+        let bcInt = req.body.bcInt;
+        let bcJok = req.body.bcJok;
+        let bcHai = req.body.bcHai;
+        let bcSoc = req.body.bcSoc;
+        let bcStr = req.body.bcStr;
+        let bcDom = req.body.bcDom;
+        let bcTra = req.body.bcTra;
+        let bcPro = req.body.bcPro;
 
         if (isNone(name) || isNone(keyword) || isNone(bType)) {
             res.json({status: 'ERR_WRONG_PARAMS'});
@@ -33,6 +51,13 @@ router.post('', async (req, res) => {
             let [result, fields] = await pool.query(query, params);
             bId = result.insertId;
 
+            query = "INSERT INTO t_breed_characters";
+            query += " (bc_b_id, bc_ada, bc_aff, bc_apa, bc_bar, bc_cat, bc_kid, bc_dog, bc_exe,";
+            query += " bc_tri, bc_hea, bc_int, bc_jok, bc_hai, bc_soc, bc_str, bc_dom, bc_tra, bc_pro)";
+            query += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            params = [bId, bcAda, bcAff, bcApa, bcBar, bcCat, bcKid, bcDog, bcExe, bcTri, bcHea, bcInt, bcJok, bcHai, bcSoc, bcStr, bcDom, bcTra, bcPro];
+            await pool.query(query, params);
+
         } else if (mode === 'MODIFY') {
             if (isNone(bId)) {
                 res.json({ status: 'ERR_WRONG_PARAMS' });
@@ -43,10 +68,17 @@ router.post('', async (req, res) => {
             params.push(bId);
             await pool.query(query, params);
 
-            // 연관 데이터 삭제
-            params = [bId];
+            query = "UPDATE t_breed_characters SET";
+            query += " bc_ada = ?, bc_aff = ?, bc_apa = ?, bc_bar = ?, bc_cat = ?, bc_kid = ?,";
+            query += " bc_dog = ?, bc_exe = ?, bc_tri = ?, bc_hea = ?, bc_int = ?, bc_jok = ?,";
+            query += " bc_hai = ?, bc_soc = ?, bc_str = ?, bc_dom = ?, bc_tra = ?, bc_pro = ?";
+            query += " WHERE bc_b_id = ?";
+            params = [bcAda, bcAff, bcApa, bcBar, bcCat, bcKid, bcDog, bcExe, bcTri, bcHea, bcInt, bcJok, bcHai, bcSoc, bcStr, bcDom, bcTra, bcPro, bId];
+            await pool.query(query, params);
 
+            // 연관 데이터 삭제
             query = "DELETE FROM t_breed_age_groups WHERE bag_b_id = ?";
+            params = [bId];
             await pool.query(query, params);
 
         } else {

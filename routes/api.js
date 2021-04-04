@@ -79,5 +79,7 @@ router.use('/notice/delete', require('./api/notice_delete.js'));
 
 router.use('/question/answer', require('./api/question_answer.js'));
 
+// router.use('/test/breed/characters', require('./api/test_breed_characters.js'));
+
 
 module.exports = router;

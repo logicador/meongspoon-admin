@@ -124,3 +124,34 @@
     padding: 12px 18px;
     margin-left: 32px;
 }
+
+
+
+
+
+.breed-character-list {
+    margin-top: 6px;
+    font-size: 0;
+}
+.breed-character {
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% / 3 - 0.1px);
+    padding-right: 10%;
+}
+.breed-character p {
+    width: 50%;
+    font-size: 1rem;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.breed-character input {
+    margin-left: 10%;
+    width: 40%;
+    font-size: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}

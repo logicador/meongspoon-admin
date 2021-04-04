@@ -12,8 +12,26 @@ const inputHiddenOriginalBreedAgeGroupData = document.querySelector('.js-input-h
 const inputHiddenBagId = document.querySelector('.js-input-hidden-bag-id');
 const buttonWeakDiseaseAdd = document.querySelector('.js-button-weak-disease-add');
 const tbodyWeakDiseaseList = document.querySelector('.js-tbody-breed-weak-disease-list');
-const inputCharacteristics = document.querySelector('.js-input-characteristics');
-// const imgCharacteristics = document.querySelector('.js-img-characteristics');
+// const inputCharacteristics = document.querySelector('.js-input-characteristics');
+
+const inputBcAda = document.querySelector('.js-input-ada');
+const inputBcAff = document.querySelector('.js-input-aff');
+const inputBcApa = document.querySelector('.js-input-apa');
+const inputBcBar = document.querySelector('.js-input-bar');
+const inputBcCat = document.querySelector('.js-input-cat');
+const inputBcKid = document.querySelector('.js-input-kid');
+const inputBcDog = document.querySelector('.js-input-dog');
+const inputBcExe = document.querySelector('.js-input-exe');
+const inputBcTri = document.querySelector('.js-input-tri');
+const inputBcHea = document.querySelector('.js-input-hea');
+const inputBcInt = document.querySelector('.js-input-int');
+const inputBcJok = document.querySelector('.js-input-jok');
+const inputBcHai = document.querySelector('.js-input-hai');
+const inputBcSoc = document.querySelector('.js-input-soc');
+const inputBcStr = document.querySelector('.js-input-str');
+const inputBcDom = document.querySelector('.js-input-dom');
+const inputBcTra = document.querySelector('.js-input-tra');
+const inputBcPro = document.querySelector('.js-input-pro');
 
 let originalBagIdList = [];
 
@@ -64,6 +82,7 @@ function getBreed(bId) {
 
         let breed = response.result.breed;
         let breedAgeGroupList = response.result.breedAgeGroupList;
+        let breedCharacter = response.result.breedCharacter;
 
         inputName.value = breed.b_name;
         selectType.value = breed.b_type;
@@ -105,6 +124,25 @@ function getBreed(bId) {
                 input.addEventListener('keyup', checkNumber);
             });
         });
+
+        inputBcAda.value = breedCharacter.bc_ada;
+        inputBcAff.value = breedCharacter.bc_aff;
+        inputBcApa.value = breedCharacter.bc_apa;
+        inputBcBar.value = breedCharacter.bc_bar;
+        inputBcCat.value = breedCharacter.bc_cat;
+        inputBcKid.value = breedCharacter.bc_kid;
+        inputBcDog.value = breedCharacter.bc_dog;
+        inputBcExe.value = breedCharacter.bc_exe;
+        inputBcTri.value = breedCharacter.bc_tri;
+        inputBcHea.value = breedCharacter.bc_hea;
+        inputBcInt.value = breedCharacter.bc_int;
+        inputBcJok.value = breedCharacter.bc_jok;
+        inputBcHai.value = breedCharacter.bc_hai;
+        inputBcSoc.value = breedCharacter.bc_soc;
+        inputBcStr.value = breedCharacter.bc_str;
+        inputBcDom.value = breedCharacter.bc_dom;
+        inputBcTra.value = breedCharacter.bc_tra;
+        inputBcPro.value = breedCharacter.bc_pro;
     });
 }
 
@@ -200,6 +238,25 @@ function saveBreed(mode, callback) {
         }
     }
 
+    let bcAda = getBreedCharacter(inputBcAda.value);
+    let bcAff = getBreedCharacter(inputBcAff.value);
+    let bcApa = getBreedCharacter(inputBcApa.value);
+    let bcBar = getBreedCharacter(inputBcBar.value);
+    let bcCat = getBreedCharacter(inputBcCat.value);
+    let bcKid = getBreedCharacter(inputBcKid.value);
+    let bcDog = getBreedCharacter(inputBcDog.value);
+    let bcExe = getBreedCharacter(inputBcExe.value);
+    let bcTri = getBreedCharacter(inputBcTri.value);
+    let bcHea = getBreedCharacter(inputBcHea.value);
+    let bcInt = getBreedCharacter(inputBcInt.value);
+    let bcJok = getBreedCharacter(inputBcJok.value);
+    let bcHai = getBreedCharacter(inputBcHai.value);
+    let bcSoc = getBreedCharacter(inputBcSoc.value);
+    let bcStr = getBreedCharacter(inputBcStr.value);
+    let bcDom = getBreedCharacter(inputBcDom.value);
+    let bcTra = getBreedCharacter(inputBcTra.value);
+    let bcPro = getBreedCharacter(inputBcPro.value);
+
     fetch('/api/breed/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -210,6 +267,11 @@ function saveBreed(mode, callback) {
             breedAgeGroups: breedAgeGroupList,
             deleteBreedAgeGroups: deleteBreedAgeGroupList,
             bType: selectType.value,
+
+            bcAda: bcAda, bcAff: bcAff, bcApa: bcApa, bcBar: bcBar, bcCat: bcCat, bcKid: bcKid,
+            bcDog: bcDog, bcExe: bcExe, bcTri: bcTri, bcHea: bcHea, bcInt: bcInt, bcJok: bcJok,
+            bcHai: bcHai, bcSoc: bcSoc, bcStr: bcStr, bcDom: bcDom, bcTra: bcTra, bcPro: bcPro,
+
             bId: (mode === 'MODIFY') ? inputHiddenBId.value : ''
         })
     })
@@ -317,6 +379,15 @@ function getDiseaseList(callback) {
 }
 
 
+function getBreedCharacter(value) {
+    value = parseInt(value);
+    if (value < 0 || value > 5) {
+        return 0;
+    }
+    return value;
+}
+
+
 function initBreed() {
     if (menu == 'breed') {
         getBreedList();
@@ -339,31 +410,31 @@ function initBreed() {
             saveBreed('ADD', (response) => {
                 let bId = response.bId;
 
-                if (inputCharacteristics.value) { // 이미지가 업로드 되었다면
-                    let form = inputCharacteristics.parentElement;
-                    let formData = new FormData(form);
-                    formData.append('bId', bId);
-
-                    fetch('/api/upload/breed/characteristics', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(data => data.json())
-                    .then((response) => {
-                        if (response.status != 'OK') {
-                            alert("에러가 발생했습니다.");
-                            removeSpinner('SAVE_BREED');
-                            removeOverlay('SAVE_BREED');
-                            return;
-                        }
-
-                        alert('견종이 추가되었습니다.');
-                        location.href = '/breed';
-                    });
-                } else {
+                // if (inputCharacteristics.value) { // 이미지가 업로드 되었다면
+                //     let form = inputCharacteristics.parentElement;
+                //     let formData = new FormData(form);
+                //     formData.append('bId', bId);
+                //
+                //     fetch('/api/upload/breed/characteristics', {
+                //         method: 'POST',
+                //         body: formData
+                //     })
+                //     .then(data => data.json())
+                //     .then((response) => {
+                //         if (response.status != 'OK') {
+                //             alert("에러가 발생했습니다.");
+                //             removeSpinner('SAVE_BREED');
+                //             removeOverlay('SAVE_BREED');
+                //             return;
+                //         }
+                //
+                //         alert('견종이 추가되었습니다.');
+                //         location.href = '/breed';
+                //     });
+                // } else {
                     alert('견종이 추가되었습니다.');
                     location.href = '/breed';
-                }
+                // }
             });
         });
     }
@@ -374,6 +445,7 @@ function initBreed() {
             createSpinner(999, 'SAVE_BREED');
             saveBreed('MODIFY', (response) => {
                 alert('견종이 수정되었습니다.');
+                location.reload();
             });
         });
     }

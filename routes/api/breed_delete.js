@@ -11,7 +11,7 @@ router.post('', async (req, res) => {
             res.json({ status: 'ERR_NO_PERMISSION' });
             return;
         }
-        
+
         let bId = req.body.bId;
 
         if (isNone(bId)) {
@@ -46,7 +46,10 @@ router.post('', async (req, res) => {
 
         query = "DELETE FROM t_breed_age_groups WHERE bag_b_id = ?";
         await pool.query(query, params);
-        
+
+        query = "DELETE FROM t_breed_characters WHERE bc_b_id = ?";
+        await pool.query(query, params);
+
         res.json({ status: 'OK' });
 
     } catch(error) {
